@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-title>Lista</mat-card-title>
+    <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSource">
+                  
+                      <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+                  
+                      <!-- Position Column -->
+                      <ng-container matColumnDef="Id">
+                            <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.Id}} </mat-cell>
+                          </ng-container>
+                      <ng-container matColumnDef="ProdottoNome">
+                        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.ProdottoNome}} </mat-cell>
+                      </ng-container>
+                  
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="TipologiaQta">
+                        <mat-header-cell *matHeaderCellDef> Misura </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.TipoQta}} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="TipologiaQtaId">
+                            <mat-header-cell *matHeaderCellDef> TipologiaQtaId </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.TipologiaQtaId}} </mat-cell>
+                          </ng-container>
+                  
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="Immagine">
+                        <mat-header-cell *matHeaderCellDef> Immagine </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.Immagine}}
+                             <!-- <img  [src]="'data:image/PNG;base64,' + element.Immagine"> -->
+                             </mat-cell>
+                      </ng-container>
+                  
+                      
+                  
+                      <mat-header-row *matHeaderRowDef="['Id','ProdottoNome','TipologiaQta','TipologiaQtaId','Immagine']"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+                        </mat-paginator>
+                  </div>
+</mat-card-content>
+</mat-card>

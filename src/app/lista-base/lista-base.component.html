@@ -1,0 +1,18 @@
+
+    <h4>Lista {{tipologiaSource}}</h4>
+ 
+<div class="example-container mat-elevation-z8" >
+  <mat-table #table [dataSource]="dataSourceModel" >
+    <ng-container *ngFor="let field of headers;let i=index" matColumnDef="{{field}}">
+      <mat-header-cell *matHeaderCellDef> {{field}} </mat-header-cell>
+      <mat-cell *matCellDef="let element "> {{element[i] }} </mat-cell>
+     
+      <mat-cell *matCellDef="let element "> {{element[i] }} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="headers"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: headers;"></mat-row>
+  </mat-table>
+  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>
+
