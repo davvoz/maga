@@ -1,6 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import * as _ from 'underscore';
-import { Data } from '../providers/data/data';
+import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-form-model',
@@ -8,32 +6,35 @@ import { Data } from '../providers/data/data';
   styleUrls: ['./form-model.component.css']
 })
 export class FormModelComponent implements OnInit {
-
+  models:any=[];
   parametri: any[];
   selected: string;
   img64 = "./assets/img/defImg.png";
-  
+
 
   constructor(
-    private data: Data
   ) {
+    let a = JSON.parse(sessionStorage.getItem('temp'));
+    this.parametri = JSON.parse(sessionStorage.getItem(JSON.parse(sessionStorage.getItem('temp')).path));
 
-    this.parametri = this.data.storage;
-     console.log(this.parametri);
 
   }
   ngOnInit() {
+    this.createModel();
+  }
+  createModel(){
+    let a = this.parametri.shift();
+    
+      for(let i = 0; i < this.parametri.length ; i++){
+        
+          this.models[i] = this.parametri[i].etichetta;
+ 
+      }
+    console.log(this.models);
+  }
+  action(){
 
   }
-
-
-  onBack(): void {
-
-  }
-  inserisceNelForm(elemento) {
-    this.selected = elemento;
-  }
-
   handleFileSelect(evt) {
     var files = evt.target.files;
     var file = files[0];

@@ -43,12 +43,15 @@ import { ListaBaseComponent } from './lista-base/lista-base.component';
 import {CdkTableModule} from '@angular/cdk/table';
 import {HttpService} from './services/httpService'
 import { RouterModule, Routes } from '@angular/router';
-import{Data}from'./providers/data/data';
+
+import { LoadingModule } from 'ngx-loading';
+
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'formProdotto',  component: FormModelComponent },
   { path: 'formPersona',    component: FormModelComponent  },
   { path: 'formScarpe',    component: FormModelComponent  },
+  { path: 'formMisura',    component: FormModelComponent  },
   { path: 'listaChimica', component: ListaBaseComponent },
   { path: 'listaProdotti', component: ListaBaseComponent },
   { path: 'listaMagazzini', component: ListaBaseComponent }
@@ -104,9 +107,12 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
-    CdkTableModule
+    CdkTableModule,
+    LoadingModule
   ],
-  providers: [HttpService,Data],
+  providers: [ 
+    HttpService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

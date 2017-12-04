@@ -1,12 +1,11 @@
 
-    <h4>Lista {{tipologiaSource}}</h4>
+    <h4>{{tipologiaSource}}</h4>
  
 <div class="example-container mat-elevation-z8" >
-  <mat-table #table [dataSource]="dataSourceModel" >
+  <mat-table #table [dataSource]="dataSourceModel" matSort >
     <ng-container *ngFor="let field of headers;let i=index" matColumnDef="{{field}}">
-      <mat-header-cell *matHeaderCellDef>diocane {{field}} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>{{field}} </mat-header-cell>
       <mat-cell *matCellDef="let element "> {{element[i] }} </mat-cell>
-     
       <mat-cell *matCellDef="let element "> {{element[i] }} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="headers"></mat-header-row>

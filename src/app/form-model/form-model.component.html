@@ -1,70 +1,28 @@
-
 <mat-card>
   <mat-card-title>Aggiungi {{parametri[0].etichetta}}
-    </mat-card-title>
+  </mat-card-title>
   <mat-card-content>
     <div *ngFor="let parametro of parametri ; let i = index" cols="4">
-      <mat-form-field [style.display]="parametri[i].isAnInput" class="example-full-width">
-        <input matInput placeholder="{{parametro.etichetta}}{{tipoDiModello}}" value="{{parametro.etichetta}}" type="{{parametro.tipoHtml}}">
+      <mat-form-field [(ngModel)]="models[i]"[style.display]="parametri[i].isAnInput" class="example-full-width">
+        <input matInput  placeholder="{{parametro.etichetta}}{{tipoDiModello}}" value="{{parametro.etichetta}}" type="{{parametro.tipoHtml}}">
       </mat-form-field>
-      <image-upload [max]="1" [style]="customStyle" [style.display]="parametri[i].isAnImgFile"></image-upload> 
+      <image-upload [max]="1" [style]="customStyle" [style.display]="parametri[i].isAnImgFile"></image-upload>
       <mat-form-field [style.display]="parametri[i].isASelect">
         <mat-select placeholder="scegli {{parametri[i].etichetta}}">
-          <mat-option *ngFor="let  elemento of parametri[i].elementiSelect" [value]="elemento">
+          <mat-option  *ngFor="let  elemento of parametri[i].elementiSelect"   [value]="elemento">
             {{ elemento }}
           </mat-option>
         </mat-select>
-      </mat-form-field> 
+      </mat-form-field>
       <mat-form-field [style.display]="parametri[i].isADate">
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
-   
     <mat-card-actions style="float: right">
-      <button mat-raised-button color="primary">Primary</button>
+      <button mat-raised-button color="primary">Submit</button>
     </mat-card-actions>
   </mat-card-content>
 </mat-card>
-<!-- <div class='well'>
-  <h2>Inserisci nuovo {{tipoDiModello}}</h2>
-</div>
-<div *ngFor="let parametro of parametri ; let i = index"> -->
 
-<!-- <div class="col-sm-10 " id="{{parametro.etichetta}}" [style.display]="parametri[i].isAnImgFile">
-      <label class="btn btn-default btn-file" (change)="handleFileSelect($event)">
-        Browse
-        <input type="file" style="display: none;">
-        <i class="glyphicon glyphicon-search"></i>
-      </label>
-    </div>  -->
-<!-- <mat-form-field [style.display]="parametri[i].isAnInput" class="example-full-width">
-      <input matInput placeholder="{{parametro.etichetta}}{{tipoDiModello}}" value="{{parametro.etichetta}}">
-    </mat-form-field> -->
-<!-- <select [style.display]="parametri[i].isASelect" class="selectpicker">
-      <option *ngFor="let elemento of parametri[i].elementiSelect">
-        <button type="button" class="btn btn-secondary" (click)='inserisceNelForm(elemento)'>{{elemento}}</button>
-      </option>
-    </select> -->
-
-<!-- <mat-form-field  [style.display]="parametri[i].isASelect">
-      <mat-select placeholder="scegli {{parametro.etichetta}}">
-        <mat-option *ngFor="let  elemento of parametri[i].elementiSelect" [value]="elemento">
-          {{ elemento }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field> -->
-<!-- <input [style.display]="parametri[i].isAnInput" type="{{parametri[i].tipoHtml}}" class="form-control" id="{{parametro.etichetta}}"
-      [(ngModel)]="valore">
-    <input [style.display]="parametri[i].isASelect" type="text" [(ngModel)]="selected" class="form-control">
-    <div [style.display]="parametri[i].isAnImgFile">
-      <span class="myImgContainer">
-        <img [src]="img64" class="preview">
-      </span> 
-    </div>-->
-<!-- </div>
-  
-
-<hr>
-<button mat-raised-button color="primary">Primary</button> -->

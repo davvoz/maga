@@ -1,89 +1,37 @@
-<!-- <div class="mdl-layout mdl-js-layout">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout-icon"></div>
-      <div class="mdl-layout__header-row">
-        <span class="mdl-layout__title">Material Design Lite</span>
-        <div class="mdl-layout-spacer"></div>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="#">Hello</a>
-          <a class="mdl-navigation__link" href="#">World.</a>
-          <a class="mdl-navigation__link" href="#">How</a>
-          <a class="mdl-navigation__link" href="#">Are</a>
-          <a class="mdl-navigation__link" href="#">You?</a>
-        </nav>
-      </div>
-    </header>
-    <div class="mdl-layout__drawer">
-      <span class="mdl-layout__title">Material Design Lite</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="#">Hello</a>
-        <a class="mdl-navigation__link" href="#">World.</a>
-        <a class="mdl-navigation__link" href="#">How</a>
-        <a class="mdl-navigation__link" href="#">Are</a>
-        <a class="mdl-navigation__link" href="#">You?</a>
-      </nav>
-    </div>
-    <main class="mdl-layout__content">
-      <div>Content</div>
-    </main>
-  </div> -->
-<mat-sidenav-container>
+<mat-sidenav-container color="background ">
   <mat-sidenav #sidenav class="example-sidenav">
     <button mat-menu-item color="primary" (click)="goHome();sidenav.close()">Home</button>
     <button mat-menu-item color="primary" [matMenuTriggerFor]="matSubMenuProdotti">
       Prodotti
     </button>
     <mat-menu #matSubMenuProdotti="matMenu">
-      <button mat-menu-item color="primary" (click)="mostraInsertProduct('menu');sidenav.close()">Nuovo Prodotto
+      <button mat-menu-item color="primary" (click)="inserisciProduct('menu');sidenav.close()">Nuovo Prodotto
       </button>
       <button mat-menu-item color="primary" (click)="getProdottiQta('menu');sidenav.close()">Lista prodotti</button>
     </mat-menu>
-    <button mat-menu-item color="primary" (click)="mostraInsertPersona();sidenav.close()">Nuova persona</button>
-    <button mat-menu-item color="primary" (click)="mostraInserisciScarpe();sidenav.close()">Nuova scarpa</button>
+    <button mat-menu-item color="primary" (click)="inserisciPersona();sidenav.close()">Nuova persona</button>
+    <button mat-menu-item color="primary" (click)="inserisciScarpe();sidenav.close()">Nuova scarpa</button>
+    <button mat-menu-item color="primary" (click)="inserisciMisura();sidenav.close()">Nuova misura</button>
     <button mat-menu-item color="primary" (click)="mostraListaChimica();sidenav.close()">Lista chimica</button>
     <button mat-menu-item color="primary" (click)="getMagazzini('menu');sidenav.close()">Lista magazzini</button>
   </mat-sidenav>
 
+
+
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
       
-      <div style="background:whitesmoke">
-        <span ><h4> <button mat-icon-button (click)="sidenav.open()">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-           End fast this shit</h4></span>
-        <div class="mdl-layout-spacer"></div>
-        <nav class="mdl-navigation">
-          <!-- <a class="mdl-navigation__link" href="#">Hello</a>
-          <a class="mdl-navigation__link" href="#">World.</a>
-          <a class="mdl-navigation__link" href="#">How</a>
-          <a class="mdl-navigation__link" href="#">Are</a>
-          <a class="mdl-navigation__link" href="#">You?</a> -->
-        </nav>
-      </div>
+        <button mat-icon-button (click)="sidenav.open()">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+       <h1> End fast this shit</h1>
+        
+    </mat-toolbar-row>
     
-  
-  <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--6-col">
+       </mat-toolbar>
+       
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '22px' }"></ngx-loading>
         <router-outlet>
         </router-outlet>
-      </div>
-      <div class="mdl-cell mdl-cell--6-col">
-          <span>
-            <strong>Nav route</strong>
-          </span>
-          <hr>
-          <span *ngFor="let el of historyNavigation ; let i = index" style="font-family: monospace;border: 1px solid black;background: whitesmoke;float:left">
-            {{i}}/{{el}}
-          </span>
-        </div>
-  
-  <div class="mdl-cell mdl-cell--4-col">STORAGE1-->{{modeldata}}</div>
-  
-  <div class="mdl-cell mdl-cell--4-col">STORAGE2-->{{modeldata2}}</div>
-  <div class="mdl-cell mdl-cell--4-col">STORAGE3-->{{modeldata3}}</div>
-  
-  <!-- <app-home ></app-home>
-          <app-form-model  [tipoDiModello]="tipoDiModelloProdotto" [parametri]="parametriProdotto"></app-form-model>
-           <app-lista-base [dataSource]="table"></app-lista-base>
-           -->
-          </div>
 </mat-sidenav-container>

@@ -1,25 +1,24 @@
 import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import {MatIconRegistry} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
+import { ActivatedRoute, NavigationExtras, Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from "@angular/router";
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import { HttpService } from './services/httpService';
-import { Data } from './providers/data/data';
-import 'rxjs/add/operator/map';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Location, LocationStrategy, PathLocationStrategy, PlatformLocation } from '@angular/common';
+import { Navigation } from 'selenium-webdriver';
+
+
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }]
 })
 
 export class AppComponent {
 
-
-  // @HostListener('hashchanged', ['$event'])
-  // onClick(e) {
-  //   console.log(e+"dioporcoooooooo")
-  // }
   title = 'app';
   tavolaChimicaDati = [
     { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -41,7 +40,7 @@ export class AppComponent {
     { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
     { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
     { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-    { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' }];;
+    { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' }];
 
   modelloFormPersona = [
     {
@@ -108,11 +107,9 @@ export class AppComponent {
 
     }];
 
-  consoleMirror: any[] = [];
+
   root = "http://localhost:53236/";
-  misure = [];
-  magazzini = [];
-  modelloFormScarpe = this.data.storage = [
+  modelloFormScarpe = [
     {
       'etichetta': "Scarpa",
       'tipoHtml': "none",
@@ -125,9 +122,9 @@ export class AppComponent {
     {
       'etichetta': "Marca",
       'tipoHtml': "text",
-      'elementiSelect': [],
-      'isASelect': "none",
-      'isAnInput': "block",
+      'elementiSelect': ['naik','ribock','puba','tinderland'],
+      'isASelect': "block",
+      'isAnInput': "none",
       'isAnImgFile': "none",
       'isADate': 'none'
     },
@@ -150,111 +147,96 @@ export class AppComponent {
       'isADate': 'none'
     },
   ];
-  historyNavigation = [];
+  modelloFormMisura = [
+    {
+      'etichetta': "Misura",
+      'tipoHtml': "none",
+      'elementiSelect': [],
+      'isASelect': "none",
+      'isAnInput': "none",
+      'isAnImgFile': "none",
+      'isADate': 'none'
+    },
+    {
+      'etichetta': "Misura in",
+      'tipoHtml': "text",
+      'elementiSelect': [],
+      'isASelect': "none",
+      'isAnInput': "block",
+      'isAnImgFile': "none",
+      'isADate': 'none'
+    },
+  ];
   modeldata;
   modeldata2;
   modeldata3;
+  modelLocation;
+  loading = false;
   constructor(
     private serviceProdotti: HttpService,
     private serviceMagazzino: HttpService,
-    private route: ActivatedRoute,
-    private router: Router,
-    public data: Data,
-    public data2: Data,
-    public data3: Data
-
-  ) {
+    private serviceQta: HttpService,
+    public router: Router,
+    public location: Location,
+    public locationPlat: PlatformLocation,
     
-    this.consoleMirror.push(this.router.url);
- 
+  ) {
+    this.location = location;
+    this.modelLocation = JSON.stringify(this.location)
   }
-  @HostListener('window:popstate', ['$event'])
-  onPopState(event) {
-    switch (this.historyNavigation[this.historyNavigation.length]) {
-      case "home":
-        break;
-      case "formProdotto":
-        this.mostraInsertProduct("switch");
-        break;
-      case "formPersona":
-        this.data.storage = this.modelloFormPersona;
-        break;
-      case "formScarpe":
-        break;
-      case "listaChimica":
-        this.data.storage = this.tavolaChimicaDati;
-        this.data3.storage3 = "tavola chimica";
-        break;
-      case "listaProdotti":
-        this.getProdottiQta("switch");
-        break;
-      case "listaMagazzini":
-        this.getMagazzini("switch");
-        break;
-    }
-    this.historyNavigation.length > 0 ? this.historyNavigation = this.historyNavigation.slice(0, -1) : null;
-  }
+
   ngOnInit(): void {
+
+  }
+  setSessions(path: string, el: any) {
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        sessionStorage.setItem('temp', JSON.stringify({ index: event.id + "", path: event.url.substr(1, event.url.length) }));
+      
+      }
+    });
+    sessionStorage.setItem(path, JSON.stringify(el));
+    this.router.navigate([path]);
   }
   goHome() {
-
-    this.router.navigate(['home']);
-    this.historyNavigation.push('home');
+    this.setSessions('home', 'testo della home')
   }
   mostraListaChimica() {
-    this.data.storage = this.tavolaChimicaDati;
-    this.data3.storage3 = "tavola chimica";
-    this.modeldata =JSON.stringify( this.data.storage);
-    this.modeldata3 =JSON.stringify( this.data3.storage3);
-    this.router.navigate(['listaChimica']); +
-      this.historyNavigation.push('listaChimica');
+    this.setSessions('listaChimica', this.tavolaChimicaDati)
   }
-
-  mostraInsertPersona() {
-    this.data.storage = this.modelloFormPersona;
-    this.modeldata =JSON.stringify( this.data.storage);
-    this.router.navigate(['formPersona']);
-    this.historyNavigation.push('formPersona');
-  }
-
-  getProdottiQta(from: string) {
+  
+  getProdottiQta() {
+    this.loading = true;
     this.serviceProdotti.getAll(this.root + "ProdottoQta/GetAllProdottiQtaSimple").subscribe(
       data => {
-        this.data.storage = data;
-        this.data3.storage3 = "prodotti";
-        this.modeldata =JSON.stringify( this.data.storage);
-        this.modeldata3 =JSON.stringify( this.data3.storage3);
-        from === 'menu' ? this.router.navigate(['listaProdotti']) : null;
-        this.historyNavigation.push('listaProdotti');
+        this.setSessions('listaProdotti', data)
+        this.loading = false;
       },
       err => console.error(err),
-      () => console.log('done loading prodottiQTa')
+      () => console.log('done loading prodotti')
     );
+
   }
-  getMagazzini(from: string) {
+  getMagazzini() {
+    this.loading = true;
     this.serviceMagazzino.getAll(this.root + "Magazzino/GetMagazzini").subscribe(
       data => {
-        this.data.storage = data;
-        this.data3.storage3 = "magazzini";
-        this.modeldata =JSON.stringify( this.data.storage);
-        this.modeldata3 =JSON.stringify( this.data3.storage3);
-        from === 'menu' ? this.router.navigate(['listaMagazzini']) : null;
-        this.historyNavigation.push('listaMagazzini');
-
+        this.setSessions('listaMagazzini', data)
+        this.loading = false;
       },
       err => console.error(err),
       () => console.log('done loading magazzini')
     );
   }
-  mostraInsertProduct(from: string) {
+  inserisciProduct() {
+    this.loading = true;
     this.serviceProdotti.getAll(this.root + "TipoQuantita/GetAllQta").subscribe(
       data => {
-        let a = [];
+        let listaMisure = [];
         for (let i = 0; i < data.length; i++) {
-          a[i] = data[i].MisuraIn
+          listaMisure[i] = data[i].MisuraIn
         }
-        this.historyNavigation.push('formProdotto');
-        this.data.storage = [
+        let modProd = [
           {
             'etichetta': "Prodotto",
             'tipoHtml': "none",
@@ -275,7 +257,7 @@ export class AppComponent {
           }, {
             'etichetta': "Tipo di misura",
             'tipoHtml': "text",
-            'elementiSelect': a,
+            'elementiSelect': listaMisure,
             'isASelect': "block",
             'isAnInput': "none",
             'isAnImgFile': "none",
@@ -289,22 +271,25 @@ export class AppComponent {
             'isAnImgFile': "block",
             'isADate': 'none'
           }];
-
-
-        from === 'menu' ? this.router.navigate(['formProdotto']):null;
-        this.modeldata =JSON.stringify( this.data.storage);
-      
+        this.setSessions('formProdotto', modProd);
+        this.loading = false;
       },
       err => console.error(err),
-      () => console.log('done loading misure')
+      () => console.log('done insert product')
     );
   }
-  mostraInserisciScarpe() {
-    this.data.storage = this.modelloFormScarpe;
-    this.modeldata =JSON.stringify( this.data.storage);
-    
-    this.router.navigate(['formScarpe']);
-    this.historyNavigation.push('formScarpe');
+  inserisciScarpe() {
+    this.setSessions('formScarpe', this.modelloFormScarpe);
   }
+  inserisciMisura(){
+    this.setSessions('formMisura', this.modelloFormMisura);
+  }
+  inserisciPersona() {
+    this.setSessions('formPersona', this.modelloFormPersona);
+  }
+  
 
 }
+// export function getLocalStorage() {
+//   return (typeof window !== "undefined") ? window.localStorage : null;;
+// }
