@@ -1,0 +1,23 @@
+
+  .imageContainer{
+    width: 300px;
+    border: 3px solid black;
+    height: 300px;
+  }
+  
+  .example-header-image {
+    background-image: url('C:/Users/David/Angular5/magazzinoProject/src/assets/img/WIN_20151213_17_35_46_Pro.jpg');
+    background-size: cover;
+  }
+  .example-card{
+    width: 300px;
+    margin:0 auto;
+    margin-bottom: 20%;
+   
+  }
+  .cont{
+    /* font-family: 'Pirata One', cursive; */
+    font-size: 150%;
+  }
+ 
+ 

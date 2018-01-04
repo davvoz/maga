@@ -1,0 +1,37 @@
+<div class="container">
+    <h4>Lista prodotti</h4>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="ProdottoNome">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.ProdottoNome}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="TipologiaQta">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Misura </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.TipologiaQta}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="Descrizione">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Descrizione </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="cella">{{element.Descrizione}} </mat-cell>
+        </ng-container>
+  
+      <ng-container matColumnDef="Immagine">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Immagine </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="cropper">
+            <img class="resized" [src]="'data:image/PNG;base64,' + element.Immagine">
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5]">
+    </mat-paginator>
+</div>
+
+

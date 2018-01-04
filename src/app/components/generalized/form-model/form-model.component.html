@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-title>Aggiungi {{parametri[0].etichetta}} {{list}}
+  </mat-card-title>
+  <mat-card-content>
+    <div *ngFor="let parametro of parametri ; let i = index" cols="4">
+      <mat-form-field  name="models[i]" [(ngModel)]="models[i]" ngDefaultControl [style.display]="parametri[i].isAnInput" class="example-full-width" >
+        <input matInput  placeholder="{{parametro.etichetta}}{{tipoDiModello}}" value="{{parametro.etichetta}}" type="{{parametro.tipoHtml}}">
+      </mat-form-field>
+      <image-upload [max]="1"  [(ngModel)]="models[i]" ngDefaultControl [style]="customStyle" [style.display]="parametri[i].isAnImgFile"></image-upload>
+      <mat-form-field [style.display]="parametri[i].isASelect">
+        <mat-select  [(ngModel)]="models[i]" ngDefaultControl placeholder="scegli {{parametri[i].etichetta}}">
+          <mat-option  *ngFor="let  elemento of parametri[i].elementiSelect"   [value]="elemento">
+            {{ elemento }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field [style.display]="parametri[i].isADate">
+        <input  [(ngModel)]="models[i]" ngDefaultControl matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <mat-card-actions style="float: right">
+      <button mat-raised-button color="primary" (click)="action()">Submit</button>
+    </mat-card-actions>
+   
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Lista di {{parametri[0].etichetta}}
+  </mat-card-title>
+  <mat-card-content>
+    Modello : {{list}}
+  </mat-card-content>
+</mat-card>
+
+  <!-- <input matInput value="Disco party!" placeholder="Message" #message>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput value="Dance" placeholder="Action" #action>
+</mat-form-field>
+
+<button mat-button (click)="openSnackBar(message.value, action.value)">Show snack-bar</button> -->
+

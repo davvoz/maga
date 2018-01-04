@@ -1,0 +1,43 @@
+@mixin candy-carousel-theme2($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  .containerX {
+    background: mat-color($warn);
+    
+  }
+  .titleX{
+    background: mat-color($primary);
+    color:mat-color($accent);
+  }
+  .subtitleX {
+    background: mat-color($accent);
+    color:mat-color($primary);
+  }
+  span.titleX  > app-miniatura{
+    background: mat-color($warn);
+    color:mat-color($accent);
+  }
+}
+.containerX {
+  border:1px solid black;
+  border-radius: 10px;
+  padding-top: 3%;
+  padding-left: 4%;
+  padding-right: 2%;
+  height: 40px;
+}
+
+.subtitleX {
+  
+  border-radius: 10px;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 5%;
+  padding-bottom: 1%;
+}
+
+.titleX {
+  margin-right: 1%;
+  display: right;
+}

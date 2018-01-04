@@ -1,0 +1,36 @@
+<div class="container">
+  <h4>
+    Misure
+  </h4>
+  <div *ngFor="let i=index;let record of misure" class="x">
+    <div class="mat-toolbar" [@onChangeDetailContainer]="display[i]">
+      <div class="ui">
+        <div class="ui1">
+          <span class="cont"> {{misure[i].MisuraIn | uppercase}}</span>
+        </div>
+        <div>
+            <span *ngIf="record.ProdottiDipendentiList.length  > 0" class="notCancellabile"> Prodotti dipendenti : {{record.ProdottiDipendentiList.length}}</span>
+            <span *ngIf="record.ProdottiDipendentiList.length  == 0" class="cancellabile" > Prodotti dipendenti : {{record.ProdottiDipendentiList.length}}</span>
+          <span class="example-spacer"></span>
+          <button mat-button>
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-button *ngIf="record.ProdottiDipendentiList.length  == 0" (click)="deleteMisura(misure[i].Id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-button (click)="openList(i)" *ngIf="record.ProdottiDipendentiList.length > 0">
+            <mat-icon>details</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div class="details"  [@onChangeDetailContent]="display[i]">
+    
+        <div *ngFor="let prodotto of record.ProdottiDipendentiList;let J=index">
+         <button mat-button color="accent">{{prodotto}}</button> </div>
+        
+    </div>
+   
+  </div>
+</div>

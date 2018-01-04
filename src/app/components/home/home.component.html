@@ -1,0 +1,35 @@
+<div class="cont">
+<mat-tab-group  color="accent" >
+  <mat-tab *ngFor="let el of listaModel" label="{{el.ProdottoNome}}" class="tab">  
+    <div class="tabContainer">    
+        <mat-card class="example-card"   >
+                <mat-card-header  >
+                  <div mat-card-avatar class="example-header-image" >
+                        <img mat-card-avatar [src]="'data:image/PNG;base64,' + el.Immagine" alt="Photo of a Shiba Inu">
+                  </div>
+                  <mat-card-title class="cont">{{el.ProdottoNome}}</mat-card-title>
+                  <mat-card-subtitle class="cont">{{el.TipologiaQta}}</mat-card-subtitle>
+                </mat-card-header>
+                
+                    <img mat-card-image [src]="'data:image/PNG;base64,' + el.Immagine"  >
+                
+               
+                <mat-card-content>
+                  <p class="descrizione">
+                    {{el.Descrizione}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button (click)="delete(el)" >
+                      <app-miniatura [bigOne]="miniatureArray[3].big" [small]="miniatureArray[3].small"></app-miniatura>
+                      <mat-icon>delete</mat-icon></button>
+                  <button mat-button  (click)="modify(el)" >
+                      <app-miniatura [bigOne]="miniatureArray[2].big" [small]="miniatureArray[2].small"></app-miniatura>
+                      <mat-icon>create</mat-icon></button>
+                </mat-card-actions>
+              </mat-card>
+            </div>  
+  </mat-tab> 
+</mat-tab-group>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '1px' ,'backdropBackgroundColour':'black'}"></ngx-loading>

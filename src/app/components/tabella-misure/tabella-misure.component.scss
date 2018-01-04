@@ -1,0 +1,53 @@
+  @import '~@angular/material/theming';
+  @mixin candy-carousel-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    .cont {
+      color: mat-color($accent);
+    }
+    .notCancellabile {
+      color: mat-color($warn)
+    }
+    .cancellabile {
+      color: mat-color($accent)
+    }
+    .details {
+      background: mat-color($primary)
+    } 
+  }
+
+  .container {
+    margin-bottom: 20%;
+    padding: 0;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .details {
+    z-index: 9;
+    position: relative;
+    
+    padding: 0;
+    
+    border: 0;
+  }
+
+  .mat-toolbar {
+    z-index: 10;
+    position: relative;
+    min-height: 100px;
+    max-height: 100px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }

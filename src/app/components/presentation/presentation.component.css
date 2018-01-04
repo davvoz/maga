@@ -1,0 +1,21 @@
+mat-card {
+  margin: 0 auto;
+  margin-bottom: 10%;
+}
+
+mat-card-content {
+  text-align: center;
+  margin: 10px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 10%;
+}
+
+

@@ -1,37 +1,116 @@
-<mat-sidenav-container color="background ">
-  <mat-sidenav #sidenav class="example-sidenav">
-    <button mat-menu-item color="primary" (click)="goHome();sidenav.close()">Home</button>
-    <button mat-menu-item color="primary" [matMenuTriggerFor]="matSubMenuProdotti">
-      Prodotti
+<!-- responsive toolbar -->
+<mat-toolbar color="primary">
+  <!-- solo mobile -->
+  <div fxShow="true" fxHide.gt-sm="true">
+    <button mat-icon-button (click)="sidenav.open()">
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #matSubMenuProdotti="matMenu">
-      <button mat-menu-item color="primary" (click)="inserisciProduct('menu');sidenav.close()">Nuovo Prodotto
-      </button>
-      <button mat-menu-item color="primary" (click)="getProdottiQta('menu');sidenav.close()">Lista prodotti</button>
-    </mat-menu>
-    <button mat-menu-item color="primary" (click)="inserisciPersona();sidenav.close()">Nuova persona</button>
-    <button mat-menu-item color="primary" (click)="inserisciScarpe();sidenav.close()">Nuova scarpa</button>
-    <button mat-menu-item color="primary" (click)="inserisciMisura();sidenav.close()">Nuova misura</button>
-    <button mat-menu-item color="primary" (click)="mostraListaChimica();sidenav.close()">Lista chimica</button>
-    <button mat-menu-item color="primary" (click)="getMagazzini('menu');sidenav.close()">Lista magazzini</button>
-  </mat-sidenav>
+  </div>
+  <!-- fine solo mobile -->
+  <span class="logo" (click)="goPresentation()">
+    <app-logo [bigOne]="logo.big" [small]="logo.small" [subtitle]="logo.subtitle" [fontSize]="logo.fontSize"></app-logo>
+  </span>
+  <span class="example-spacer"></span>
+  <!-- solo desktop -->
+  <div fxShow="true" fxHide.lt-md="true">
 
-
-
-
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      
-        <button mat-icon-button (click)="sidenav.open()">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-       <h1> End fast this shit</h1>
-        
-    </mat-toolbar-row>
+    <button mat-raised-button [matMenuTriggerFor]="matSubCreate" color="accent">
+      <app-miniatura [bigOne]="miniatureArray[0].big" [small]="miniatureArray[0].small"></app-miniatura>
+    </button>
     
-       </mat-toolbar>
-       
-        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '22px' }"></ngx-loading>
-        <router-outlet>
-        </router-outlet>
+
+    <button mat-raised-button [matMenuTriggerFor]="matSubMenuProdotti" color="accent">
+      <app-miniatura [bigOne]="miniatureArray[1].big" [small]="miniatureArray[1].small"></app-miniatura>
+    </button>
+    
+
+  </div>
+
+  <!-- fine solo desktop -->
+</mat-toolbar>
+<mat-sidenav-container>
+  <!-- solo mobile -->
+  <mat-sidenav #sidenav>
+    <div fxLayout="column" class="flexMobileMenu">
+      <!-- CREATE -->
+      <a mat-menu-item [matMenuTriggerFor]="matSubCreate">
+        <app-miniatura [bigOne]="miniatureArray[0].big" [small]="miniatureArray[0].small"></app-miniatura>
+      </a>
+      <mat-menu #matSubCreate="matMenu">
+        <a mat-menu-item (click)="go('CREATE','PRODOTTO','formProdotto');sidenav.close()">
+          <app-miniatura [bigOne]="createProdMiniatura.big" [small]="createProdMiniatura.small"></app-miniatura>
+        </a>
+        <a mat-menu-item (click)="go('CREATE','MAGAZZINO','formMagazzino');sidenav.close()">
+          <app-miniatura [bigOne]="createMagMiniatura.big" [small]="createMagMiniatura.small"></app-miniatura>
+        </a>
+        <a mat-menu-item (click)="go('CREATE','MISURA','formMisura');sidenav.close()">
+          <app-miniatura [bigOne]="createQtaMiniatura.big" [small]="createQtaMiniatura.small"></app-miniatura>
+        </a>
+        <a mat-menu-item (click)="goAddGiacenza();sidenav.close()">
+          <app-miniatura [bigOne]="createGiacenzaMiniatura.big" [small]="createGiacenzaMiniatura.small"></app-miniatura>
+        </a>
+      </mat-menu>
+      <!-- READ -->
+      <a mat-menu-item [matMenuTriggerFor]="matSubMenuProdotti">
+        <app-miniatura [bigOne]="miniatureArray[1].big" [small]="miniatureArray[1].small"></app-miniatura>
+      </a>
+      <mat-menu #matSubMenuProdotti="matMenu">
+        <a mat-menu-item [matMenuTriggerFor]="md">
+          <app-miniatura [bigOne]="createProdMiniatura.big" [small]="createProdMiniatura.small"></app-miniatura>
+        </a>
+        <mat-menu #md="matMenu">
+          <a mat-menu-item (click)="go('READ','PRODOTTO','home');sidenav.close()">
+            <app-miniatura [bigOne]="slideshowProdMiniature.big" [small]="slideshowProdMiniature.small"></app-miniatura>
+          </a>
+          <a mat-menu-item (click)="go('READ','PRODOTTO','listaProdotti');sidenav.close()">
+            <app-miniatura [bigOne]="listaProdMiniature.big" [small]="listaProdMiniature.small"></app-miniatura>
+          </a>
+        </mat-menu>
+        <a mat-menu-item (click)="go('READ','MAGAZZINO','listaMagazzini');sidenav.close()">
+          <app-miniatura [bigOne]="listaMagMiniature.big" [small]="listaMagMiniature.small"></app-miniatura>
+        </a>
+        <a mat-menu-item (click)="go('READ','MISURA','listaMisure');sidenav.close()">
+          <app-miniatura [bigOne]="listaMisureMiniature.big" [small]="listaMisureMiniature.small"></app-miniatura>
+        </a>
+      </mat-menu>
+      <!-- UPDATE -->
+      <!-- <a mat-menu-item [matMenuTriggerFor]="md">
+          <app-miniatura [bigOne]="miniatureArray[2].big" [small]="miniatureArray[2].small"></app-miniatura>
+        </a> -->
+      <!-- <mat-menu #matSubUpdate="matMenu">
+          <a mat-menu-item (click)="go('READ','PRODOTTO','listaProdotti');sidenav.close()">
+            <app-miniatura [bigOne]="createProdMiniatura.big" [small]="createProdMiniatura.small"></app-miniatura>
+          </a>
+          <a mat-menu-item (click)="go('READ','MAGAZZINO','listaMagazzini');sidenav.close()">
+            <app-miniatura [bigOne]="createMagMiniatura.big" [small]="createMagMiniatura.small"></app-miniatura>
+          </a>
+          <a mat-menu-item>
+            <app-miniatura [bigOne]="createQtaMiniatura.big" [small]="createQtaMiniatura.small"></app-miniatura>
+          </a>
+          <a mat-menu-item>
+            <app-miniatura [bigOne]="createGiacenzaMiniatura.big" [small]="createGiacenzaMiniatura.small"></app-miniatura>
+          </a>
+        </mat-menu> -->
+      <!-- DELETE -->
+      <!-- <a mat-menu-item color="primary" (click)="inserisciProduct();sidenav.close()">
+        <app-miniatura [bigOne]="miniatureArray[3].big" [small]="miniatureArray[3].small"></app-miniatura>
+      </a> -->
+
+    </div>
+  </mat-sidenav>
+  <!--fine solo mobile -->
+  <mat-sidenav-content>
+
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '1px','backdropBackgroundColour':'black' }"></ngx-loading>
+    <router-outlet></router-outlet>
+
+    <!-- <footer class="foot">
+        <mat-toolbar-row>
+          <small>Angular version : {{angularVersion.version}} - Material Version : {{materialVersion.version}}
+          </small>
+          <span class="example-spacer-foot"></span>
+          <small>Author : Davvoz</small>
+        </mat-toolbar-row>
+      </footer> -->
+  </mat-sidenav-content>
 </mat-sidenav-container>
