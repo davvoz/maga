@@ -16,7 +16,8 @@
       "dom"
     ],
     "types": [
-      "underscore"
-    ]
+      "node"
+    ],
+    
   }
 }

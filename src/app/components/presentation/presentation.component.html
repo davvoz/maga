@@ -1,30 +1,43 @@
-<div class='container'>
-  <h4>Hello world!</h4>
-  <p>My stuffs</p>
-
-  <mat-toolbar>Back-end</mat-toolbar>
-
-
-  <mat-list>
-    <mat-list-item>C#</mat-list-item>
-    <mat-list-item>MSSQL</mat-list-item>
-    <mat-list-item>ORM</mat-list-item>
-    <mat-list-item>API's</mat-list-item>
-  </mat-list>
-  <mat-toolbar>Front-end</mat-toolbar>
-  <mat-list>
-    <mat-list-item>Angular5</mat-list-item>
-    <mat-list-item>Angular material</mat-list-item>
-    <mat-list-item>HTML</mat-list-item>
-    <mat-list-item>CSS</mat-list-item>
-  </mat-list>
-  <mat-toolbar>General pourpose</mat-toolbar>
-  <mat-list>
-    <mat-list-item>OOP</mat-list-item>
-    <mat-list-item>Svg - Git</mat-list-item>
-    <mat-list-item>Lambda expressions</mat-list-item>
-    <mat-list-item>Http</mat-list-item>
-    <mat-list-item>JSON</mat-list-item>
-    <mat-list-item>Session storage</mat-list-item>
-  </mat-list>
+<h3>
+  Hello world!</h3>
+<p>My stuff , my skills ... my embarrassment</p>
+<div *ngFor="let sezione of sezioni ; let i = index">
+  <mat-toolbar class="contenente">{{sezione.titolo}}
+    <span class="example-spacer"></span>
+    <button mat-button (click)="openList(i)">
+      <mat-icon>details</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="contenuto" style="margin-left:5%" *ngFor="let competenza of  sezione.competenze ; let j = index" [@onChangeDetailContent]="display[i]">
+    <button mat-button (click)="openDetail(i,j)">
+      <div class="contenente">
+        <strong>{{competenza.competenza}}</strong>
+      </div>
+    </button>
+    <div class="contenutoX" style="margin-right:15%;" [@onChangeDetailContent]="displayNested[i][j]"> {{competenza.descrizione}}</div>
+  </div>
 </div>
+<div>
+  <mat-toolbar class="contenente">Codice di questa sezione
+    <span class="example-spacer"></span>
+    <button mat-button (click)="openList(3)">
+      <mat-icon>details</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="contenuto" [@onChangeDetailContent]="display[3]">
+    <mat-tab-group>
+      <mat-tab label="HTML">
+        
+      </mat-tab>
+      <mat-tab label="TS">
+        
+      </mat-tab>
+      <mat-tab label="CSS">
+        
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '1px','backdropBackgroundColour':'black' }"></ngx-loading>

@@ -1,0 +1,70 @@
+ [
+    {
+      "titolo": "Back-end",
+      "competenze": [
+        {
+          "competenza": "C#",
+          "descrizione": "Mi hanno detto di usare questo , principalmente voglio solo riempire spazio per mostrare questa amazing animation ...Quindi vai di Lorem ipsumEsistono innumerevoli variazioni dei passaggi del Lorem Ipsum, ma la maggior parte hanno subito delle variazioni del tempo, a causa dell’inserimento di passaggi ironici, o di sequenze casuali di caratteri palesemente poco verosimili. Se si decide di utilizzare un passaggio del Lorem Ipsum, è bene essere certi che non contenga nulla di imbarazzante. In genere, i generatori di testo segnaposto disponibili su internet tendono a ripetere paragrafi predefiniti, rendendo questo il primo vero generatore automatico su intenet. Infatti utilizza un dizionario di oltre 200 vocaboli latini, combinati con un insieme di modelli di strutture di periodi, per generare passaggi di testo verosimili"
+        },
+        {
+          "competenza": "MSSQL",
+          "descrizione": "Vuolente o nuolente , come sopra"
+        },
+        {
+          "competenza": "ORM",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "API's",
+          "descrizione": "desc in work"
+        }]
+    },
+    {
+      "titolo": "Front-end",
+      "competenze": [
+        {
+          "competenza": "ANGULAR5",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "MAterial",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "HTML",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "CSS",
+          "descrizione": "desc in work"
+        }]
+    },
+    {
+      "titolo": "General pourpose",
+      "competenze": [
+        {
+          "competenza": "OOP",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "GIT",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "Lambda expression",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "JSON",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "Javascript",
+          "descrizione": "desc in work"
+        },
+        {
+          "competenza": "Session storage",
+          "descrizione": "desc in work"
+        }]
+    }
+]

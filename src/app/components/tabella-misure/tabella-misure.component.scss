@@ -7,14 +7,29 @@
       color: mat-color($accent);
     }
     .notCancellabile {
-      color: mat-color($warn)
+      background-color:  red;
+      
     }
     .cancellabile {
-      color: mat-color($accent)
+      background-color:  green;
+      
+    }
+    .cancellabile,.notCancellabile{
+      border-radius:30%;
+      font-family: monospace;
+      color: mat-color($accent);
+      min-height: 30px;
+      max-height: 30px;
+      min-width: 30px;
+      max-width: 30px;
+      text-align: center;
+      float: right;
     }
     .details {
-      background: mat-color($primary)
-    } 
+      background-color: mat-color($accent);
+      color: mat-color($primary);
+      margin-left:7%;
+    }
   }
 
   .container {
@@ -31,7 +46,7 @@
     position: relative;
     
     padding: 0;
-    
+    overflow-y: auto;
     border: 0;
   }
 

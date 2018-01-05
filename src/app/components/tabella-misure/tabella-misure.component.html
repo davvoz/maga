@@ -3,32 +3,33 @@
     Misure
   </h4>
   <div *ngFor="let i=index;let record of misure" class="x">
-    <div class="mat-toolbar" [@onChangeDetailContainer]="display[i]">
-      <div class="ui">
-        <div class="ui1">
-          <span class="cont"> {{misure[i].MisuraIn | uppercase}}</span>
-        </div>
-        <div>
-            <span *ngIf="record.ProdottiDipendentiList.length  > 0" class="notCancellabile"> Prodotti dipendenti : {{record.ProdottiDipendentiList.length}}</span>
-            <span *ngIf="record.ProdottiDipendentiList.length  == 0" class="cancellabile" > Prodotti dipendenti : {{record.ProdottiDipendentiList.length}}</span>
+    <mat-toolbar class="mat-toolbar">
+      
+      <mat-toolbar-row>
+          {{misure[i].MisuraIn | uppercase}}
+      </mat-toolbar-row>
+        <mat-toolbar-row>
+            <span *ngIf="record.ProdottiDipendentiList.length  > 0" class="notCancellabile">{{record.ProdottiDipendentiList.length}}</span>
+            <span *ngIf="record.ProdottiDipendentiList.length  == 0" class="cancellabile" >{{record.ProdottiDipendentiList.length}}</span>
           <span class="example-spacer"></span>
-          <button mat-button>
+         
+          <button mat-icon-button >
             <mat-icon>create</mat-icon>
           </button>
-          <button mat-button *ngIf="record.ProdottiDipendentiList.length  == 0" (click)="deleteMisura(misure[i].Id)">
+          <button mat-icon-button *ngIf="record.ProdottiDipendentiList.length  == 0" (click)="deleteMisura(misure[i])">
             <mat-icon>delete</mat-icon>
           </button>
-          <button mat-button (click)="openList(i)" *ngIf="record.ProdottiDipendentiList.length > 0">
+          <button mat-icon-button  (click)="openList(i)" *ngIf="record.ProdottiDipendentiList.length > 0">
             <mat-icon>details</mat-icon>
           </button>
-        </div>
-      </div>
+        </mat-toolbar-row>
+      
 
-    </div>
+    </mat-toolbar>
     <div class="details"  [@onChangeDetailContent]="display[i]">
-    
+    This product's foreign key are {{misure[i].MisuraIn}}'s' primary key , u can't delete
         <div *ngFor="let prodotto of record.ProdottiDipendentiList;let J=index">
-         <button mat-button color="accent">{{prodotto}}</button> </div>
+         <button mat-button  >{{prodotto}}</button> </div>
         
     </div>
    

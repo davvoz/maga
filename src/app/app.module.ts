@@ -62,8 +62,10 @@ import { PresentationComponent } from './components/presentation/presentation.co
 import { GeneralGridComponent } from './components/generalized/general-grid/general-grid.component';
 
 
+
 const appRoutes: Routes = [
-  {path: 'presentation',component:PresentationComponent},
+  { path: '', redirectTo: 'presentation', pathMatch: 'full' },
+  { path: 'presentation',component:PresentationComponent },
   { path: 'home', component: HomeComponent },
   { path: 'updateProdotto', component: FormUpdateProdottoComponent },
   { path: 'formProdotto', component: FormProdottoComponent },
@@ -140,7 +142,6 @@ const appRoutes: Routes = [
     CdkTableModule,
     LoadingModule,
     FlexLayoutModule,
-    CodemirrorModule,
     HttpClientModule
   ],
   providers: [

@@ -1,0 +1,25 @@
+@import '~@angular/material/theming';
+@mixin tenda-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  .contenente {
+    position: relative;
+    min-height: 100px;
+    max-height: 100px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  .contenuto,
+  .contenutoX {
+    position: relative;
+    padding: 0;
+    overflow-y: hidden;
+    border: 0;
+  }
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
