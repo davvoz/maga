@@ -1,0 +1,23 @@
+.container {
+  height: 500px;
+  width: 500px;
+  background: green;
+}
+
+span {
+  float: left;
+}
+
+.example-card {
+  width: 300px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.monitor{
+  margin-left: 5%;
+}
+canvas{
+  /* background: red; */
+}

@@ -60,7 +60,10 @@ import { FormMagazzinoComponent } from './components/form-magazzino/form-magazzi
 import { TabellaMisureComponent } from './components/tabella-misure/tabella-misure.component';
 import { PresentationComponent } from './components/presentation/presentation.component';
 import { GeneralGridComponent } from './components/generalized/general-grid/general-grid.component';
+import { AcidCanvasComponent } from './components/acid-canvas/acid-canvas.component';
+import { DrawCanvasComponent } from './components/draw-canvas/draw-canvas.component';
 
+// import { YoutubePlayerModule } from 'ng2-youtube-player';
 
 
 const appRoutes: Routes = [
@@ -95,6 +98,8 @@ const appRoutes: Routes = [
     TabellaMisureComponent,
     PresentationComponent,
     GeneralGridComponent,
+    AcidCanvasComponent,
+    DrawCanvasComponent,
     
   ],
   imports: [
@@ -142,7 +147,7 @@ const appRoutes: Routes = [
     CdkTableModule,
     LoadingModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     HttpService,

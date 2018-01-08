@@ -1,0 +1,51 @@
+<span>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Divertiamoci con la canvas</mat-card-title>
+      <mat-card-subtitle>Randomizzatore di sezioni di cerchio con sfondo randomizzato</mat-card-subtitle>
+    </mat-card-header>
+    <canvas #myCanvas height="{{canvas.height}}" width="{{canvas.width}}"></canvas>
+    <mat-card-content>
+
+      <table>
+        <tr>
+          <td>SPEED</td>
+          <td>
+            <mat-slider [thumbLabel]="thumbLabel" [(ngModel)]="interval" [max]="max" [min]="min" (change)="speedSliderTouched($event)"></mat-slider>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>ALPHA</td>
+          <td>
+            <mat-slider [thumbLabel]="thumbLabel" [(ngModel)]="alphaM" [max]="maxAlpha" [min]="minAlpha" (change)="alphaSliderTouched($event)"></mat-slider>
+          </td>
+          <td>{{alpha}}</td>
+        </tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button (click)="looppa()">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+      <button mat-icon-button (click)="stoppa()">
+        <mat-icon>pause</mat-icon>
+      </button>
+      <button mat-icon-button (click)="clear()">
+        <mat-icon>
+          clear</mat-icon>
+      </button>
+      <button mat-icon-button (click)="save()">
+        <mat-icon>done</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</span>
+<span class="example-spacer"></span>
+<span class="monitor">
+  <a [href]="imgModel" download>
+    <img height="{{canvas.height}}" width="{{canvas.width}}" mat-card-image [src]="imgModel" download>
+  </a>
+  <br> Click on image for download
+</span>

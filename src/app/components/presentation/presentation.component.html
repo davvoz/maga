@@ -1,6 +1,6 @@
 <h3>
   Hello world!</h3>
-<p>My stuff , my skills ... my embarrassment</p>
+<p>stuff</p>
 <div *ngFor="let sezione of sezioni ; let i = index">
   <mat-toolbar class="contenente">{{sezione.titolo}}
     <span class="example-spacer"></span>
@@ -11,33 +11,25 @@
   <div class="contenuto" style="margin-left:5%" *ngFor="let competenza of  sezione.competenze ; let j = index" [@onChangeDetailContent]="display[i]">
     <button mat-button (click)="openDetail(i,j)">
       <div class="contenente">
-        <strong>{{competenza.competenza}}</strong>
+        <strong>{{competenza.nome}}</strong>
       </div>
     </button>
-    <div class="contenutoX" style="margin-right:15%;" [@onChangeDetailContent]="displayNested[i][j]"> {{competenza.descrizione}}</div>
+    <div *ngIf="competenza.nome !== 'Angular5' && competenza.nome !== 'Angular Material' && competenza.nome !== 'Angular Material'"  class="contenutoX" style="margin-right:15%;" [@onChangeDetailContent]="displayNested[i][j]"> {{competenza.descrizione}}</div>
+    <div *ngIf="competenza.nome === 'Angular5'" class="contenutoX" style="margin-right:15%;" [@onChangeDetailContent]="displayNested[i][j]"> {{ngM}}</div>
+    <div *ngIf="competenza.nome === 'Angular Material'" class="contenutoX" style="margin-right:15%;" [@onChangeDetailContent]="displayNested[i][j]"> {{matM}}</div>
   </div>
 </div>
 <div>
-  <mat-toolbar class="contenente">Codice di questa sezione
+  <mat-toolbar class="contenente">Other stuff
     <span class="example-spacer"></span>
     <button mat-button (click)="openList(3)">
       <mat-icon>details</mat-icon>
     </button>
   </mat-toolbar>
   <div class="contenuto" [@onChangeDetailContent]="display[3]">
-    <mat-tab-group>
-      <mat-tab label="HTML">
+    
+          <app-acid-canvas></app-acid-canvas>
         
-      </mat-tab>
-      <mat-tab label="TS">
-        
-      </mat-tab>
-      <mat-tab label="CSS">
-        
-      </mat-tab>
-    </mat-tab-group>
   </div>
-</div>
-
-
+      
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '1px','backdropBackgroundColour':'black' }"></ngx-loading>

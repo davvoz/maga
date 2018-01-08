@@ -1,7 +1,7 @@
 <div class="container">
-  <h4>
+  <h1>
     Misure
-  </h4>
+  </h1>
   <div *ngFor="let i=index;let record of misure" class="x">
     <mat-toolbar class="mat-toolbar">
       
@@ -27,7 +27,7 @@
 
     </mat-toolbar>
     <div class="details"  [@onChangeDetailContent]="display[i]">
-    This product's foreign key are {{misure[i].MisuraIn}}'s' primary key , u can't delete
+    
         <div *ngFor="let prodotto of record.ProdottiDipendentiList;let J=index">
          <button mat-button  >{{prodotto}}</button> </div>
         
